@@ -12,6 +12,7 @@ int interpolationSearch(string item, vector<string> list, int listLength)
 	int oben = listLength-1;
 	int run = 0;
 	cout << "looking for " << item << "\n";
+	cout << list[8] << "\n";
 	while (oben > unten)
 	{
 		
@@ -41,20 +42,23 @@ int interpolationSearch(string item, vector<string> list, int listLength)
 				cout << "item is SMALLER then NEXT \n";
 
 				int i = 0;
-				while (true)
-				{
-					if (list[(next - ((i+1) * sqrt_n + 1))].compare(item) <= 0 && list[(next - (i * sqrt_n))].compare(item) >= 0)
-					{
+				// look for an  i. While statement makes sure the resulting value isn't bigger then the length of the list
+				while ((next - ((i+1) * sqrt_n + 1)) <= listLength-1 || (next - (i * sqrt_n)) <= listLength-1){
+					cout << "dafuq are you doing? \n"; 
+					//if i is found that fullfills the statement break out of loop. Else i+1 and start over
+					if(list[(next - ((i+1) * sqrt_n + 1))].compare(item) <= 0 && list[(next - (i * sqrt_n))].compare(item) >= 0){
 						break;
 					}else{
+						cout << "3 \n";
 						i=i+1;
 					}
 				}
 				
 				oben = next - (i * sqrt_n);
-				int temp = (next - ((i+1)*sqrt_n) +1);
+				int temp = (next - ((i+1)*sqrt_n +1));
 				unten =  max(unten, temp);
 				
+				cout << "i: " << i << "\n";
 				cout << "New oben: " << oben <<"\n";
 				cout << "New unten: " << unten << "\n";
 				
@@ -62,8 +66,10 @@ int interpolationSearch(string item, vector<string> list, int listLength)
 
 				cout << "item is BIGGER then NEXT \n";
 				int i = 0;
-	
-				while(true){
+
+				// look for an  i. While statement makes sure the resulting value isn't bigger then the length of the list
+				while((next + (i * sqrt_n)) <= listLength-1 || (next + ((i+1)*sqrt_n) -1) <= listLength-1){
+					//if i is found that fullfills the statement break out of loop. Else i+1 and start over
 					if(list[next + (i*sqrt_n)].compare(item) <= 0 && list[next + ((i+1)*sqrt_n) - 1].compare(item) >= 0){	
 						break;
 					}else{
@@ -75,6 +81,7 @@ int interpolationSearch(string item, vector<string> list, int listLength)
 				oben = min(oben, temp);
 				unten =  i * floor(sqrt(n)) + next;
 				
+				cout << "i: " << i << "\n";
 				cout << "New oben: " << oben <<"\n";
 				cout << "New unten: " << unten << "\n";
 				
