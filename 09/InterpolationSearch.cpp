@@ -5,66 +5,44 @@
 int interpolationSearch(string item, vector<string> list, int listLength)
 {
 	//TODO: Hier vervollständigen
-	/*string unten = list[0];
-	string oben = list[listLength-1];*/
-	
 	int unten = 0;
 	int oben = listLength-1;
 	int run = 0;
-	cout << "looking for " << item << "\n";
-	cout << list[8] << "\n";
+
 	while (oben > unten)
 	{
-		
-		cout << "=================================== \n";
-		cout << "Durchlauf Nr: " << run << "\n";
-		
 		run++;
 		int mitte = floor((oben-unten) / 2); 
-		//string mitte = list[floor ((oben - unten) / 2)];
 		int next = floor(stringQuotient(list[unten], item ,list[oben]) * (oben-unten)) + unten;
-		
-		cout << "Intial oben: " << oben << "\n";
-		cout << "Intial unten: " << unten << "\n";
-		cout << "Initial next: " << next << "\n";
-		
+
 		if ((item).compare(list[next]) == 0)
 		{
 			return next;
 		}
-		else{
-			
+		else{	
 			int n = oben - unten + 1;
 			int sqrt_n = floor(sqrt(n));
-			cout << "Intial Sqrt_n: " << sqrt_n << "\n";
+
 			if (item.compare(list[next]) < 0)
 			{
-				cout << "item is SMALLER then NEXT \n";
-
 				int i = 0;
 				// look for an  i. While statement makes sure the resulting value isn't bigger then the length of the list
 				while ((next - ((i+1) * sqrt_n + 1)) <= listLength-1 || (next - (i * sqrt_n)) <= listLength-1){
-					cout << "dafuq are you doing? \n"; 
 					//if i is found that fullfills the statement break out of loop. Else i+1 and start over
 					if(list[(next - ((i+1) * sqrt_n + 1))].compare(item) <= 0 && list[(next - (i * sqrt_n))].compare(item) >= 0){
+						cout << "in if \n";
 						break;
 					}else{
-						cout << "3 \n";
 						i=i+1;
 					}
 				}
 				
 				oben = next - (i * sqrt_n);
-				int temp = (next - ((i+1)*sqrt_n +1));
+				int temp = (next - ((i+1) * sqrt_n) + 1);
 				unten =  max(unten, temp);
-				
-				cout << "i: " << i << "\n";
-				cout << "New oben: " << oben <<"\n";
-				cout << "New unten: " << unten << "\n";
 				
 			}else{
 
-				cout << "item is BIGGER then NEXT \n";
 				int i = 0;
 
 				// look for an  i. While statement makes sure the resulting value isn't bigger then the length of the list
@@ -80,11 +58,7 @@ int interpolationSearch(string item, vector<string> list, int listLength)
 				int temp = (i+1) * floor(sqrt(n))-1 + next;
 				oben = min(oben, temp);
 				unten =  i * floor(sqrt(n)) + next;
-				
-				cout << "i: " << i << "\n";
-				cout << "New oben: " << oben <<"\n";
-				cout << "New unten: " << unten << "\n";
-				
+			
 			}
 			
 		}
