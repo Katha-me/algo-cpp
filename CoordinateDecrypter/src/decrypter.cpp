@@ -30,7 +30,7 @@ string decrypter::decrypt()
 	for (int p = 0; p < encryptedCoordinate.length(); p += position)
 	{	
 		// Um die Leerzeichen zu entfernen, kann folgende Zeile auskommentiert werden
-		//if (encryptedCoordinate.at(p) != ' ')
+		if (encryptedCoordinate.at(p) != ' ')
 		decryptedCoordinate += encryptedCoordinate.at(p);
 	}
 	return decryptedCoordinate;
