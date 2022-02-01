@@ -7,8 +7,6 @@ using namespace std;
 
 int main(int argc, char** argv)
 {
-	//TODO: Setze die Pfade zu den beiden Dateien
-	cout << "hi from main \n";
 	ifstream codeStream("../code.txt");
 	ifstream encryptedCoordinateStream("../koordinate.txt");
 	string code((istreambuf_iterator<char>(codeStream)),(istreambuf_iterator<char>()));

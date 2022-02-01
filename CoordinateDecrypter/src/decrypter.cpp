@@ -1,26 +1,40 @@
 #include "decrypter.h"
+#include <iostream>
+
+//help function to determine maximum of 2 ints
+int max(int x, int y){
+	return (x>y ? x : y);
+}
 
 int decrypter::longestPalindrome(string sequence)
 {
-	//TODO: Berechne die Länge des längsten Palindroms in sequence 
-	int maxLength = 1;
-	int start = 0;
 
-    for (int i = 0; i < sequence.length(); i++) {
-        for (int j = i; j < sequence.length(); j++) {
-            int flag = 1;
- 
-            for (int k = 0; k < (j - i + 1) / 2; k++)
-                if (sequence[i + k] != sequence[j - k])
-                    flag = 0;
- 
-            if (flag && (j - i + 1) > maxLength) {
-                start = i;
-                maxLength = j - i + 1;
-            }
-        }
-    }
-	return maxLength;
+	int n = sequence.length(); //length of sequence
+   	int i, j, subl;
+	int T[n][n]; //creat table with nxn
+	
+
+	for (i = 0; i < n; i++)
+
+		T[i][i] = 1;
+
+		for (subl=2; subl<=n; subl++)
+		{
+			for (i=0; i<n-subl+1; i++)
+			{
+				j = i+subl-1;
+				if (sequence[i] == sequence[j] && subl == 2){
+					T[i][j] = 2;
+				}
+				else if (sequence[i] == sequence[j]){
+					T[i][j] = T[i+1][j-1] + 2;
+				}
+				else{
+					T[i][j] = max(T[i][j-1], T[i+1][j]);
+				}
+			}
+		}
+		return T[0][n-1];
 }
 
 string decrypter::decrypt()
